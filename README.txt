@@ -1,19 +1,22 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: nda.ca
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
+Nda Product Extensions
+Contributors: sabdelmalik
+Donate link: 
+Tags: woocommerce
+Requires at least: 4.8.1
+Tested up to: 5.7
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
-
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
-
+This plugin adds a tab "NDA Product Options" to the admin product page. These options allow the admin to:
+ 1. control the price visibility (a price must always be assigned)
+    a. Normal display of the price
+    a. Hide the price for the product.
+    b. Hide the price only for the product for unlogged users. In place of the price, it displays "Please login to see the price."
+ 2. Control the minimum and maximum quantity to order.
+ 3. Allow the customer to request a quotation by displaying a "Request a Quote" button on the product page.
 For backwards compatibility, if this section is missing, the full length of the short description will be used, and
 Markdown parsed.
 

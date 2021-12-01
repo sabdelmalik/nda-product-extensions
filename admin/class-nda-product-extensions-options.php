@@ -140,7 +140,9 @@ class Nda_Product_Extensions_Options{
         'description' => __('Allow customer to request a quote using a specific form.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
         'options' => array(
           'not_allowed' => __('Not allowed', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'wedding' => __('Wedding cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN))
+          'wedding' => __('Wedding cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+          'basic_cake' => __('Basic cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),        
+          'decorated_cake' => __('Decorated cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN))        
         ));
     ?>
     <hr style="display: block;margin-top: 1em;margin-bottom: 1em;margin-left: auto;margin-right: auto;border-style: inset;color: black; border-width: 2px;">
@@ -180,50 +182,6 @@ class Nda_Product_Extensions_Options{
     echo '</div>';
 
   }
-
-
-  function nda_product_options_pricing(  ) { 
-    return;
-    global $woocommerce, $post;
-?>
-    <h2><b>NDA Product Extensions</b></h2>
-    <hr style="display: block;margin-top: 1em;margin-bottom: 1em;margin-left: auto;margin-right: auto;border-style: inset;color: black; border-width: 2px;">
-<?php
-    
-/*  woocommerce_wp_checkbox(
-    array(
-        'id' => '_nda_product_price_for_loggedin_only',
-        'label' => __( 'Restrict price display', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN ),
-        'placeholder' => 'Restrict price display for this product',
-        'desc_tip' => 'true',
-        'description' => __( "Restrict price display for this product.", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN )
-
-    ));*/
-
-    woocommerce_wp_select(
-      array(
-        'id' => '_nda_product_price_display_restriction',
-        'label' => __('Restrict price display', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'desc_tip' => true,
-        'description' => __('Restrict price display for this product.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'options' => array(
-          'no_restrictions' => __('No restrictions', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'logged_in_users' => __('Show to logged in users only', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'no_display' => __('No price display', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN))
-        ));
-
-    woocommerce_wp_select(
-      array(
-        'id' => '_nda_product_request_a_quote_options',
-        'label' => __('Request a Quote', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'desc_tip' => true,
-        'description' => __('Allow customer to request a quote using a specific form.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'options' => array(
-          'not_allowed' => __('Not allowed', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'wedding' => __('Wedding cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN))
-        ));
-
-  } 
 
   function save_product_data( $post_id, $post ) { 
    // error_log("----- save_product_data - \$post_id = " . var_export($post_id, 1));

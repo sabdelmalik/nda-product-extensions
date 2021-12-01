@@ -113,7 +113,15 @@ class Nda_Product_Extensions_Hide_Price {
       $result = '<span> Please login to see the price.</span>';
       return $result;
     }
-    return $price; // Return price for the all the other products
+    // add "each" suffix to the price SM 2021-11-30
+    if(!empty($price)){
+      error_log("=== \$price = '" . var_export($price,1));
+      $suffix = '<span class="nda-price-suffix">each</span>';
+      return $price . ' ' . $suffix; // Return price for the all the other products
+    }
+    else{
+      return $price;
+    }
   }
 
 

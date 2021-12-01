@@ -167,6 +167,12 @@ class Nda_Product_Extensions_Request_Quote {
     if($quotation_form == 'wedding'){
       echo $this->get_quote_form('request-a-quote');
     }
+    if($quotation_form == 'basic_cake'){
+      echo $this->get_quote_form('basic-cake-quote-request');
+    }
+    if($quotation_form == 'decorated_cake'){
+      echo $this->get_quote_form('decorated-cake-quote-request');
+    }
   }
 
 }
