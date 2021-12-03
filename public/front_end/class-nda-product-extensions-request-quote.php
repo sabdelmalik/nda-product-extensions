@@ -100,13 +100,13 @@ class Nda_Product_Extensions_Request_Quote {
   }
 
   
-  function get_quote_form($form_name)
-  {DIRECTORY_SEPARATOR . 
+  function get_quote_form($form_name, $quotation_button_label)
+  {
     //$quote = '<form class="cart" action="http://noble.delicious/wordpress/noble1/request-a-quote/" method="post" enctype="multipart/form-data">
     $quote = '<form class="cart" action="' . get_site_url() . '/' . $form_name . '" method="post" enctype="multipart/form-data">
         <div class="gpls_rfq_set_div" style="clear: both">
                   <!--<button type="submit" name="add-to-quote" onmouseover=";" onmouseout=";" onload=";" class="single_add_to_cart_button button alt  gpls_rfq_set gpls_rfq_css" value="588" style="display: inline-block">Add To Quote</button>-->
-                  <button type="submit" name="request a quote" onmouseover=";" onmouseout=";" onload=";" class="single_add_to_cart_button button" style="display: inline-block">Request a Quote</button>
+                  <button type="submit" name="request a quote" onmouseover=";" onmouseout=";" onload=";" class="single_add_to_cart_button button" style="display: inline-block">' . $quotation_button_label . '</button>
                   <input type="hidden" value="-1" name="rfq_product_id" id="rfq_product_id">
                   <input type="hidden" name="rfq_single_product" id="rfq_product_id">
                 </div>
@@ -159,20 +159,52 @@ class Nda_Product_Extensions_Request_Quote {
     {
       $quotation_form = $quotation_form[0];
     }
+    if (empty($quotation_form)){
+      $quotation_form = 'none';
+    }
+    $quotation_button_label = get_post_meta($product->get_id(), '_nda_request_a_quote_btn_label');
+    if(is_array($quotation_button_label))
+    {
+      $quotation_button_label = $quotation_button_label[0];
+    }
+    if (empty($quotation_button_label)){
+      $quotation_button_label = __("Request a Quote", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN);
+    }
+
+    $quotation_form2 = get_post_meta($product->get_id(), '_nda_product_request_a_quote_options2');
+    if(is_array($quotation_form2))
+    {
+      $quotation_form2 = $quotation_form2[0];
+    }
+    if (empty($quotation_form2)){
+      $quotation_form2 = 'none';
+    }
+
+    $quotation_button_label2 = get_post_meta($product->get_id(), '_nda_request_a_quote_btn_label2');
+    if(is_array($quotation_button_label2))
+    {
+      $quotation_button_label2 = $quotation_button_label2[0];
+    }
+    if (empty($quotation_button_label2)){
+      $quotation_button_label2 = __("Request a Quote", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN);
+    }
 
     if(($price_restriction == 'no_display') || 
     (($price_restriction == 'logged_in_users')&& !is_user_logged_in())){
       echo '</div>';
     }
-    if($quotation_form == 'wedding'){
-      echo $this->get_quote_form('request-a-quote');
+    if($quotation_form != 'none'){
+      echo $this->get_quote_form($quotation_form, $quotation_button_label);
     }
-    if($quotation_form == 'basic_cake'){
+    if($quotation_form2 != 'none'){
+      echo $this->get_quote_form($quotation_form2, $quotation_button_label2);
+    }
+/*    if($quotation_form == 'basic_cake'){
       echo $this->get_quote_form('basic-cake-quote-request');
     }
     if($quotation_form == 'decorated_cake'){
       echo $this->get_quote_form('decorated-cake-quote-request');
-    }
+    }*/
   }
 
 }

@@ -96,6 +96,7 @@ class Nda_Product_Extensions {
 	 */
 	private function load_dependencies() {
 
+    require_once NDA_PRODUCT_EXTENSIONS_INC_DIR . 'functions.php';
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.

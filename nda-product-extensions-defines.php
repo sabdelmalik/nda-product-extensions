@@ -70,3 +70,7 @@ if ( ! defined( 'NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN' ) ) {
 if ( ! defined( 'NDA_PRODUCT_EXTENSIONS_ADMIN_MENU_SLUG' ) ) {
 	define( 'NDA_PRODUCT_EXTENSIONS_ADMIN_MENU_SLUG', 'nda-product-extensions-settings' );
 }
+
+if ( ! defined( 'NDA_EXTENSIONS_ADMIN_MENU_SLUG' ) ) {
+	define( 'NDA_EXTENSIONS_ADMIN_MENU_SLUG', 'nda-extensions-admin-menu' );
+}

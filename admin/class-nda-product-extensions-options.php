@@ -117,6 +117,8 @@ class Nda_Product_Extensions_Options{
     <div id="nda_product_options_data" class="panel woocommerce_options_panel hidden">
     <h2><b>Control Price Display</b></h2>
     <?php
+    // ============================================
+    // Control price display
     woocommerce_wp_select(
       array(
         'id' => '_nda_product_price_display_restriction',
@@ -132,22 +134,59 @@ class Nda_Product_Extensions_Options{
     <hr style="display: margin-left: auto;margin-right: auto;border-style: inset;color: black; border-width: 2px;">
     <h2><b>Control Quotation Request</b></h2>
     <?php    
-    woocommerce_wp_select(
-      array(
-        'id' => '_nda_product_request_a_quote_options',
-        'label' => __('Request a Quote', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'desc_tip' => true,
-        'description' => __('Allow customer to request a quote using a specific form.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-        'options' => array(
-          'not_allowed' => __('Not allowed', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'wedding' => __('Wedding cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
-          'basic_cake' => __('Basic cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),        
-          'decorated_cake' => __('Decorated cake quotation form', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN))        
-        ));
+    // ============================================
+    // Control Request for Quotation
+    $form_options = array();
+    $form_options['none'] = __('None', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN);
+    $pages = get_pages();
+    foreach($pages as $page) {
+      $post = get_post($page->ID, ARRAY_A);
+      if(strpos($post['post_content'], '[Form id="') !== false){
+        $form_options[$post['post_name']] = __($page->post_title, NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN);
+      }
+    }
+  woocommerce_wp_select(
+    array(
+      'id' => '_nda_product_request_a_quote_options',
+      'label' => __('Request a Quote', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+      'desc_tip' => true,
+      'description' => __('Allow customer to request a quote using a specific form.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+      'options' =>$form_options,
+      ));
+  woocommerce_wp_text_input( 
+    array(
+      'id' => '_nda_request_a_quote_btn_label', 
+      'label' => __("Button Label", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN), 
+      'desc_tip' => true, 
+      'description' => __("Set the label for the rquest quote button", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+      'type' => 'text',
+      'placeholder' => __("Request a Quote", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN), 
+      ));
+      woocommerce_wp_select(
+        array(
+          'id' => '_nda_product_request_a_quote_options2',
+          'label' => __('Request a Quote 2', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+          'desc_tip' => true,
+          'description' => __('Allow customer to request a quote using a specific form.', NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+          'options' =>$form_options,
+          ));
+      woocommerce_wp_text_input( 
+        array(
+          'id' => '_nda_request_a_quote_btn_label2', 
+          'label' => __("Button Label 2", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN), 
+          'desc_tip' => true, 
+          'description' => __("Set the label for the rquest quote button", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN),
+          'type' => 'text',
+          'placeholder' => __("Request a Quote", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN), 
+          ));
+        
+      
     ?>
     <hr style="display: block;margin-top: 1em;margin-bottom: 1em;margin-left: auto;margin-right: auto;border-style: inset;color: black; border-width: 2px;">
     <h2><b>Control Minimum and Maximum Order Quantity</b></h2>
     <?php
+    // ============================================
+    // Control order quantity Min And Max
     woocommerce_wp_checkbox( array(
       'id' => '_nda_enable_product_minimum', 
       'label' => __("Enable Minimum Quantity", NDA_PRODUCT_EXTENSIONS_TEXT_DOMAIN), 
@@ -190,6 +229,9 @@ class Nda_Product_Extensions_Options{
    // error_log("----- save_product_data - \$_POST = " . var_export($_POST, 1));
     update_post_meta($post_id, '_nda_product_price_display_restriction', $_POST['_nda_product_price_display_restriction']);
     update_post_meta($post_id, '_nda_product_request_a_quote_options', $_POST['_nda_product_request_a_quote_options']);
+    update_post_meta($post_id, '_nda_request_a_quote_btn_label', $_POST['_nda_request_a_quote_btn_label']);
+    update_post_meta($post_id, '_nda_product_request_a_quote_options2', $_POST['_nda_product_request_a_quote_options2']);
+    update_post_meta($post_id, '_nda_request_a_quote_btn_label2', $_POST['_nda_request_a_quote_btn_label2']);
 
     $enable_min = $_POST['_nda_enable_product_minimum'];
     $min_qty = $_POST['_nda_product_minimum_qty'];

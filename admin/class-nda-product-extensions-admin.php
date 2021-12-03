@@ -75,7 +75,8 @@ class Nda_Product_Extensions_Admin {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-    require_once NDA_PRODUCT_EXTENSIONS_ADMIN_DIR.'class-nda-product-extensions-options.php';
+    require_once NDA_PRODUCT_EXTENSIONS_ADMIN_DIR .'class-nda-product-extensions-options.php';
+    require_once NDA_PRODUCT_EXTENSIONS_ADMIN_DIR .'settings/class-nda-product-extensions-settings.php';
   }
 
   /**
@@ -99,6 +100,7 @@ class Nda_Product_Extensions_Admin {
 	 */
 	private function instantiate_admin_classes() {
     new Nda_Product_Extensions_Options($this->plugin_name, $this->version, $this->loader);
+  //  new Nda_Product_Extensions_Settings($this->plugin_name, $this->version, $this->loader);
   }
 
 

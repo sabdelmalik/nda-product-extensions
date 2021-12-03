@@ -166,7 +166,7 @@ class Nda_Product_Extensions_MIN_MAX_QTY {
 
   public function product_quantity_input_args( $args, $product ) {
     // error_log("product_quantity_input_args");
-    error_log("product_quantity_input_args - \$args = " . var_export($args, 1));
+    //error_log("product_quantity_input_args - \$args = " . var_export($args, 1));
     //error_log("product_quantity_input_args - \$product = " . var_export($product, 1));
    
     $post_id = $product->get_id();
@@ -203,7 +203,7 @@ class Nda_Product_Extensions_MIN_MAX_QTY {
     }
   
      /** Return the updated argument to the product page */
-     error_log("product_quantity_input_args - \$returned args = " . var_export($args, 1));
+     //error_log("product_quantity_input_args - \$returned args = " . var_export($args, 1));
      return $args;
    }
  

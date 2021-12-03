@@ -90,7 +90,9 @@ class Nda_Product_Extensions_Public {
   private function define_hooks() {
 		$this->loader->add_action( 'wp_enqueue_scripts', $this, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this, 'enqueue_scripts' );
-	}
+	
+    $this->loader->add_action( 'template_redirect', $this, 'nda_template_redirect_for_single_product' );
+  }
 
   /**
 	 * Instantiate admin classes
@@ -105,6 +107,19 @@ class Nda_Product_Extensions_Public {
     new Nda_Product_Extensions_MIN_MAX_QTY($this->plugin_name, $this->version, $this->loader);
   }
 
+  function nda_template_redirect_for_single_product() {
+    global $wp_query;
+
+    // Redirect to the product page if we have a single product
+    if ( is_product_category() && 1 === $wp_query->found_posts ) {
+        $product = wc_get_product( $wp_query->post );
+        if ( $product && $product->is_visible() ) {
+            wp_safe_redirect( get_permalink( $product->id ), 302 );
+            exit;
+        }
+    }
+
+}
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
